@@ -1,0 +1,105 @@
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+   implementation group: 'org.json', name: 'json', version: '20200518'
+}
+
+//define main class
+mainClassName = 'Concentration'
+
+task runServer(type: JavaExec) {
+  group 'server'
+  description 'Creates Server socket waits for messages'
+
+  classpath = sourceSets.main.runtimeClasspath
+
+  main = 'taskone.Server'
+  standardInput = System.in
+  
+  // run with arguments e.g.: gradle runServer -Pport=8000 -q --console=plain
+  if (project.hasProperty('port')) {
+    args(project.getProperty('port'));
+  }
+}
+
+  task runThreadedServer(type: JavaExec) {
+    group 'ThreadedServer'
+    description 'Creates Server socket waits for messages'
+
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = 'taskone.ThreadedServer'
+    standardInput = System.in
+
+    // run with arguments e.g.: gradle runThreadedServer -Pport=8000 -q --console=plain
+    if (project.hasProperty('port')) {
+      args(project.getProperty('port'));
+    }
+  }
+
+task runThreadedPoolServer(type: JavaExec) {
+  group 'server'
+  description 'Creates Server socket waits for messages'
+
+  classpath = sourceSets.main.runtimeClasspath
+
+  main = 'taskone.ThreadedPoolServer'
+  standardInput = System.in
+
+  // run with arguments e.g.: gradle runThreadedPoolServer -Pport=8000 -Pnthreads=2 -q --console=plain
+  if (project.hasProperty('port') && project.hasProperty('nthreads')) {
+    args(project.getProperty('port'), project.getProperty('nthreads'));
+  }
+}
+
+task runClient(type: JavaExec) {
+  group 'client'
+  description 'Creates client socket sends a message to the server'
+
+  classpath = sourceSets.main.runtimeClasspath
+  standardInput = System.in
+
+  main = 'taskone.Client'
+  standardInput = System.in
+
+  // run with arguments e.g.: gradle runClient -Phost=localhost -Pport=8000 -q --console=plain
+  if (project.hasProperty("host") && project.hasProperty('port')) {
+    args(project.getProperty('host'), project.getProperty('port'));
+  }
+}
+
+def port = 8000
+def nthreads = 2
+
+task runTask1(type: JavaExec) {
+  classpath = sourceSets.main.runtimeClasspath
+  description = "Run Task1"
+  main = 'taskone.Server'
+
+  args port
+}
+
+task runTask2(type: JavaExec) {
+  classpath = sourceSets.main.runtimeClasspath
+  description = "Run Task2"
+  main = 'taskone.ThreadedServer'
+
+  args port
+}
+
+task runTask3(type: JavaExec) {
+  classpath = sourceSets.main.runtimeClasspath
+  description = "Run Task3"
+  main = 'taskone.ThreadedPoolServer'
+
+  args port
+  args nthreads
+}
+
+
+
+
