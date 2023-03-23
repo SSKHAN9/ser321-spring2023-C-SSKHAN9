@@ -1,0 +1,11 @@
+
+0Wed Mar 22 18:13:09 MST 2023: server 1 - CONNECT
+0Wed Mar 22 18:13:27 MST 2023: 2server2 - CONNECT
+,Wed Mar 22 18:13:58 MST 2023: ser2 - CONNECT
+0Wed Mar 22 18:15:59 MST 2023: saervr 1 - CONNECT
+/Wed Mar 22 18:16:28 MST 2023: server2 - CONNECT
++Wed Mar 22 18:19:08 MST 2023: dod - CONNECT
+/Wed Mar 22 18:36:41 MST 2023: server1 - CONNECT
+.Wed Mar 22 18:41:53 MST 2023: server - CONNECT
+.Wed Mar 22 18:44:35 MST 2023: server - CONNECT
+.Wed Mar 22 18:46:05 MST 2023: server - CONNECT
