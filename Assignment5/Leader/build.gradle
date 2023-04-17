@@ -1,0 +1,85 @@
+apply plugin: 'application'
+
+
+
+mainClassName = 'main.java.Main'
+
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    jcenter()
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    implementation "junit:junit:4.12"
+    implementation files('cls/')
+    implementation group: 'org.json', name: 'json', version: '20200518'
+}
+
+
+task node1(type: JavaExec) {
+  description 'Runs a node'
+  
+  classpath = sourceSets.main.runtimeClasspath
+
+  main = 'main.java.Node'
+  standardInput = System.in
+
+  args 'localhost' // host
+  args '8080' // port
+  
+  // run with arguments e.g.: gradle runThreadPoolServer -Pport=9099 -q --console=plain
+  // NEW: can now run like ---> gradle runTask3 -Pport=8888 -q --console=plain
+  if (project.hasProperty('money')) {
+    args(project.getProperty('money'));
+  }
+
+}
+task node2(type: JavaExec) {
+  description 'Runs a node'
+  
+  classpath = sourceSets.main.runtimeClasspath
+
+  main = 'main.java.Node'
+  standardInput = System.in
+
+  args 'localhost' // host
+  args '8080' // port
+  
+  // run with arguments e.g.: gradle runThreadPoolServer -Pport=9099 -q --console=plain
+  // NEW: can now run like ---> gradle runTask3 -Pport=8888 -q --console=plain
+  if (project.hasProperty('money')) {
+    args(project.getProperty('money'));
+  }
+
+}
+
+
+
+task client(type: JavaExec) {
+  description 'Runs a Client'
+  
+  classpath = sourceSets.main.runtimeClasspath
+
+  main = 'main.java.Client'
+  standardInput = System.in
+
+  args 'localhost' // host
+  args '8080' // port
+  
+
+}
+
+task leader(type: JavaExec) {
+  description 'Runs a Leader'
+  
+  classpath = sourceSets.main.runtimeClasspath
+
+  main = 'main.java.Leader'
+  standardInput = System.in
+  
+  args 'localhost' // host
+  args '8080' // port
+
+}
